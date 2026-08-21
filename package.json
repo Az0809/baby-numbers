@@ -1,0 +1,37 @@
+{
+  "name": "baby-numbers",
+  "version": "1.1.0",
+  "private": true,
+  "description": "给 3 岁儿童使用的 1～100 数字启蒙网站",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "preview": "node scripts/preview.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "npm run test:unit",
+    "test:unit": "node scripts/run-unit-tests.mjs",
+    "test:e2e": "npm run build && playwright test",
+    "validate": "npm run typecheck && npm run lint && npm run test:unit && npm run build"
+  },
+  "dependencies": {
+    "next": "16.3.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "22.18.0",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "eslint": "9.35.0",
+    "eslint-config-next": "16.3.0",
+    "postcss": "8.5.26",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.2"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}
