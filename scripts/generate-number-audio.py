@@ -17,6 +17,7 @@ RATE = "-12%"
 PITCH = "+4Hz"
 VOLUME = "+0%"
 AUDIO_VERSION = "2026-08-21-v2-natural"
+GENERATION_PROFILE = "child-friendly-natural-v2"
 
 
 def to_chinese(number: int) -> str:
@@ -66,6 +67,7 @@ async def main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
     manifest: dict[str, object] = {
         "version": AUDIO_VERSION,
+        "profile": GENERATION_PROFILE,
         "mime": "audio/mpeg",
         "generator": f"edge-tts {VOICE}",
         "voice": VOICE,
