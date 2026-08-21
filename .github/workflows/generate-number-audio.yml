@@ -1,0 +1,43 @@
+name: 生成数字本地音频
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - scripts/generate-number-audio.py
+      - .github/workflows/generate-number-audio.yml
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 安装离线语音工具
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y espeak ffmpeg
+
+      - name: 生成 1～100 中文音频
+        run: python scripts/generate-number-audio.py
+
+      - name: 提交生成结果
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/audio/numbers
+          if git diff --cached --quiet; then
+            echo "音频没有变化"
+          else
+            git commit -m "build: 生成 1～100 本地中文音频"
+            git push origin HEAD:main
+          fi
