@@ -1,6 +1,6 @@
 const CACHE_PREFIX = "baby-numbers-";
-const AUDIO_VERSION = "2026-08-21-v1";
-const CACHE_NAME = `${CACHE_PREFIX}v8-local-audio`;
+const AUDIO_VERSION = "2026-08-21-v2-natural";
+const CACHE_NAME = `${CACHE_PREFIX}v9-natural-audio`;
 const AUDIO_FILES = Array.from(
   { length: 100 },
   (_, index) => `/audio/numbers/${index + 1}.mp3?v=${AUDIO_VERSION}`
