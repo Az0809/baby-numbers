@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toChineseNumber } from "@/lib/numbers";
 
 type SpeakOptions = {
@@ -9,6 +9,11 @@ type SpeakOptions = {
 };
 
 type SpeakValue = number | string;
+
+type AudioManifest = {
+  version?: string;
+  generator?: string;
+};
 
 const AUDIO_VERSION = "2026-08-21-v2-natural";
 const chineseNumberLookup = new Map<string, number>(
@@ -23,10 +28,6 @@ let sharedAudioNumber: number | null = null;
 let sharedUtterance: SpeechSynthesisUtterance | null = null;
 let globalPlaybackToken = 0;
 
-function subscribeSpeechSupport(): () => void {
-  return () => undefined;
-}
-
 function getAudioSupport(): boolean {
   return typeof window !== "undefined"
     && typeof document !== "undefined"
@@ -37,14 +38,6 @@ function getSpeechSupport(): boolean {
   return typeof window !== "undefined"
     && "speechSynthesis" in window
     && "SpeechSynthesisUtterance" in window;
-}
-
-function getClientSupport(): boolean {
-  return getSpeechSupport() || getAudioSupport();
-}
-
-function getServerSpeechSupport(): boolean {
-  return false;
 }
 
 function getNumberAudioUrl(number: number): string {
@@ -102,13 +95,13 @@ function scoreVoice(voice: SpeechSynthesisVoice): number {
 
 function pickChineseVoice(): SpeechSynthesisVoice | undefined {
   if (!getSpeechSupport()) return undefined;
-  const voices = window.speechSynthesis.getVoices();
-  return voices
+  return window.speechSynthesis
+    .getVoices()
     .filter((voice) => /^zh(?:-|_)/i.test(voice.lang) || /ting|shelley|xiaoyi|xiaoxiao/i.test(voice.name))
     .sort((a, b) => scoreVoice(b) - scoreVoice(a))[0];
 }
 
-function playLocalFallback(number: number): boolean {
+function playNaturalLocalAudio(number: number): boolean {
   const audio = getSharedAudio();
   if (!audio) return false;
 
@@ -135,7 +128,7 @@ function playLocalFallback(number: number): boolean {
     if (playPromise) {
       void playPromise.catch(() => {
         if (globalPlaybackToken === token) {
-          // 本地音频只是最后兜底，失败时不再播放机械系统音。
+          // 自然音频播放失败时保持静默，不再降级到机械音。
         }
       });
     }
@@ -162,12 +155,28 @@ function stopAllAudio() {
 }
 
 export function useChineseSpeech(soundEnabled: boolean) {
-  const supported = useSyncExternalStore(
-    subscribeSpeechSupport,
-    getClientSupport,
-    getServerSpeechSupport
-  );
-  const mounted = useRef(true);
+  const [naturalAudioReady, setNaturalAudioReady] = useState(false);
+  const supported = getSpeechSupport() || naturalAudioReady;
+
+  useEffect(() => {
+    let cancelled = false;
+
+    void fetch(`/audio/numbers/manifest.json?v=${AUDIO_VERSION}`, { cache: "no-store" })
+      .then((response) => response.ok ? response.json() as Promise<AudioManifest> : null)
+      .then((manifest) => {
+        if (cancelled || !manifest) return;
+        const isNatural = manifest.version === AUDIO_VERSION
+          && /edge-tts|neural|natural/i.test(manifest.generator ?? "");
+        setNaturalAudioReady(isNatural);
+      })
+      .catch(() => {
+        if (!cancelled) setNaturalAudioReady(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const speak = useCallback((value: SpeakValue, options: SpeakOptions = {}) => {
     if (!soundEnabled && !options.force) return false;
@@ -175,8 +184,7 @@ export function useChineseSpeech(soundEnabled: boolean) {
     const number = normalizeNumber(value);
     const text = typeof value === "number" ? toChineseNumber(value) : value;
 
-    // iPhone/iPad Safari：必须在用户点击的同步调用栈里直接 speak，
-    // 不能 setTimeout，否则会丢失媒体/语音授权。
+    // iPhone/iPad Safari 必须在用户点击的同步调用栈里直接 speak。
     if (getSpeechSupport()) {
       const synth = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(text);
@@ -198,7 +206,9 @@ export function useChineseSpeech(soundEnabled: boolean) {
       };
       utterance.onerror = () => {
         if (sharedUtterance === utterance) sharedUtterance = null;
-        if (!started && number !== null) playLocalFallback(number);
+        if (!started && naturalAudioReady && number !== null) {
+          playNaturalLocalAudio(number);
+        }
       };
 
       try {
@@ -207,36 +217,28 @@ export function useChineseSpeech(soundEnabled: boolean) {
         synth.speak(utterance);
         return true;
       } catch {
-        if (number !== null) return playLocalFallback(number);
+        if (naturalAudioReady && number !== null) return playNaturalLocalAudio(number);
       }
     }
 
-    if (number !== null) return playLocalFallback(number);
+    if (naturalAudioReady && number !== null) return playNaturalLocalAudio(number);
     return false;
-  }, [soundEnabled]);
+  }, [naturalAudioReady, soundEnabled]);
 
   const stop = useCallback(() => {
     stopAllAudio();
   }, []);
 
   useEffect(() => {
-    mounted.current = true;
+    if (!getSpeechSupport()) return stop;
 
-    if (getSpeechSupport()) {
-      const synth = window.speechSynthesis;
-      const loadVoices = () => synth.getVoices();
-      loadVoices();
-      synth.addEventListener?.("voiceschanged", loadVoices);
-
-      return () => {
-        mounted.current = false;
-        synth.removeEventListener?.("voiceschanged", loadVoices);
-        stop();
-      };
-    }
+    const synth = window.speechSynthesis;
+    const loadVoices = () => synth.getVoices();
+    loadVoices();
+    synth.addEventListener?.("voiceschanged", loadVoices);
 
     return () => {
-      mounted.current = false;
+      synth.removeEventListener?.("voiceschanged", loadVoices);
       stop();
     };
   }, [stop]);
