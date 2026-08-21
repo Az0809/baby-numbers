@@ -1,4 +1,4 @@
-name: 生成数字本地音频
+name: 生成数字自然女声音频
 
 on:
   workflow_dispatch:
@@ -15,19 +15,21 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: 检出仓库
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: 安装离线语音工具
+      - name: 安装 Python 与音频工具
         run: |
           sudo apt-get update
-          sudo apt-get install -y espeak ffmpeg
+          sudo apt-get install -y ffmpeg
+          python -m pip install --upgrade pip
+          python -m pip install "edge-tts>=7,<8"
 
-      - name: 生成 1～100 中文音频
+      - name: 生成 1～100 中文自然女声音频
         run: python scripts/generate-number-audio.py
 
       - name: 提交生成结果
@@ -38,6 +40,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "音频没有变化"
           else
-            git commit -m "build: 生成 1～100 本地中文音频"
+            git commit -m "build: 替换 1～100 为自然神经女声音频"
             git push origin HEAD:main
           fi
