@@ -40,7 +40,7 @@ function getSpeechSupport(): boolean {
 }
 
 function getClientSupport(): boolean {
-  return getAudioSupport() || getSpeechSupport();
+  return getSpeechSupport() || getAudioSupport();
 }
 
 function getServerSpeechSupport(): boolean {
@@ -55,7 +55,6 @@ function normalizeNumber(value: SpeakValue): number | null {
   if (typeof value === "number") {
     return Number.isInteger(value) && value >= 1 && value <= 100 ? value : null;
   }
-
   return chineseNumberLookup.get(value.trim()) ?? null;
 }
 
@@ -86,25 +85,76 @@ function getSharedAudio(): HTMLAudioElement | null {
   return audio;
 }
 
+function scoreVoice(voice: SpeechSynthesisVoice): number {
+  const lang = voice.lang.toLowerCase();
+  const name = voice.name.toLowerCase();
+  let score = 0;
+
+  if (lang === "zh-cn" || lang === "zh_cn") score += 100;
+  else if (lang.startsWith("zh")) score += 60;
+
+  if (/tingting|ting-ting|shelley|xiaoyi|xiaoxiao|huihui|yaoyao/.test(name)) score += 30;
+  if (/siri|premium|enhanced|natural|neural/.test(name)) score += 20;
+  if (voice.localService) score += 5;
+
+  return score;
+}
+
 function pickChineseVoice(): SpeechSynthesisVoice | undefined {
   if (!getSpeechSupport()) return undefined;
   const voices = window.speechSynthesis.getVoices();
-  return voices.find((voice) => /^(zh-CN|zh_Hans|zh(-|_))/i.test(voice.lang))
-    ?? voices.find((voice) => /ting|mei-jia|sin-ji|li-mu/i.test(voice.name));
+  return voices
+    .filter((voice) => /^zh(?:-|_)/i.test(voice.lang) || /ting|shelley|xiaoyi|xiaoxiao/i.test(voice.name))
+    .sort((a, b) => scoreVoice(b) - scoreVoice(a))[0];
+}
+
+function playLocalFallback(number: number): boolean {
+  const audio = getSharedAudio();
+  if (!audio) return false;
+
+  const token = ++globalPlaybackToken;
+  audio.pause();
+  audio.muted = false;
+  audio.volume = 1;
+  audio.playbackRate = 1;
+
+  if (sharedAudioNumber !== number || !audio.currentSrc.includes(`/audio/numbers/${number}.mp3`)) {
+    audio.src = getNumberAudioUrl(number);
+    sharedAudioNumber = number;
+    audio.load();
+  } else {
+    try {
+      audio.currentTime = 0;
+    } catch {
+      // Safari 元数据未加载完成时可能禁止 seek。
+    }
+  }
+
+  try {
+    const playPromise = audio.play();
+    if (playPromise) {
+      void playPromise.catch(() => {
+        if (globalPlaybackToken === token) {
+          // 本地音频只是最后兜底，失败时不再播放机械系统音。
+        }
+      });
+    }
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function stopAllAudio() {
   globalPlaybackToken += 1;
-
   if (sharedAudio) {
     sharedAudio.pause();
     try {
       sharedAudio.currentTime = 0;
     } catch {
-      // Safari 在音频元数据尚未读取时可能禁止 seek。
+      // Safari 元数据未加载完成时可能禁止 seek。
     }
   }
-
   if (getSpeechSupport()) {
     window.speechSynthesis.cancel();
     sharedUtterance = null;
@@ -119,96 +169,51 @@ export function useChineseSpeech(soundEnabled: boolean) {
   );
   const mounted = useRef(true);
 
-  const speakWithSystemVoice = useCallback((text: string, rate = 0.72) => {
-    if (!getSpeechSupport()) return false;
-
-    const synth = window.speechSynthesis;
-    synth.cancel();
-    synth.resume();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    sharedUtterance = utterance;
-    utterance.lang = "zh-CN";
-    utterance.rate = rate;
-    utterance.pitch = 1.08;
-    utterance.volume = 1;
-
-    const voice = pickChineseVoice();
-    if (voice) utterance.voice = voice;
-
-    const clear = () => {
-      if (sharedUtterance === utterance) sharedUtterance = null;
-    };
-    utterance.onend = clear;
-    utterance.onerror = clear;
-
-    window.setTimeout(() => {
-      if (!mounted.current) return;
-      synth.resume();
-      synth.speak(utterance);
-    }, 0);
-    return true;
-  }, []);
-
   const speak = useCallback((value: SpeakValue, options: SpeakOptions = {}) => {
     if (!soundEnabled && !options.force) return false;
 
     const number = normalizeNumber(value);
     const text = typeof value === "number" ? toChineseNumber(value) : value;
 
-    if (number !== null) {
-      const audio = getSharedAudio();
+    // iPhone/iPad Safari：必须在用户点击的同步调用栈里直接 speak，
+    // 不能 setTimeout，否则会丢失媒体/语音授权。
+    if (getSpeechSupport()) {
+      const synth = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance(text);
+      sharedUtterance = utterance;
+      utterance.lang = "zh-CN";
+      utterance.rate = options.rate ?? 0.78;
+      utterance.pitch = 1.03;
+      utterance.volume = 1;
 
-      if (audio) {
-        const token = globalPlaybackToken + 1;
-        globalPlaybackToken = token;
+      const voice = pickChineseVoice();
+      if (voice) utterance.voice = voice;
 
-        if (getSpeechSupport()) {
-          window.speechSynthesis.cancel();
-          sharedUtterance = null;
-        }
+      let started = false;
+      utterance.onstart = () => {
+        started = true;
+      };
+      utterance.onend = () => {
+        if (sharedUtterance === utterance) sharedUtterance = null;
+      };
+      utterance.onerror = () => {
+        if (sharedUtterance === utterance) sharedUtterance = null;
+        if (!started && number !== null) playLocalFallback(number);
+      };
 
-        audio.pause();
-        audio.muted = false;
-        audio.volume = 1;
-        audio.playbackRate = 1;
-
-        const nextSource = getNumberAudioUrl(number);
-        if (sharedAudioNumber !== number || !audio.currentSrc.includes(`/audio/numbers/${number}.mp3`)) {
-          audio.src = nextSource;
-          sharedAudioNumber = number;
-          audio.load();
-        } else {
-          try {
-            audio.currentTime = 0;
-          } catch {
-            // Safari 在音频尚未就绪时可能禁止 seek。
-          }
-        }
-
-        let fallbackStarted = false;
-        const fallback = () => {
-          if (fallbackStarted || globalPlaybackToken !== token) return;
-          fallbackStarted = true;
-          speakWithSystemVoice(text, options.rate);
-        };
-
-        try {
-          // 必须在点击事件的同步调用栈中执行，iPhone 才会授权媒体播放。
-          const playPromise = audio.play();
-          if (playPromise) {
-            void playPromise.catch(fallback);
-          }
-          return true;
-        } catch {
-          fallback();
-          return getSpeechSupport();
-        }
+      try {
+        if (synth.speaking || synth.pending) synth.cancel();
+        synth.resume();
+        synth.speak(utterance);
+        return true;
+      } catch {
+        if (number !== null) return playLocalFallback(number);
       }
     }
 
-    return speakWithSystemVoice(text, options.rate);
-  }, [soundEnabled, speakWithSystemVoice]);
+    if (number !== null) return playLocalFallback(number);
+    return false;
+  }, [soundEnabled]);
 
   const stop = useCallback(() => {
     stopAllAudio();
@@ -216,13 +221,6 @@ export function useChineseSpeech(soundEnabled: boolean) {
 
   useEffect(() => {
     mounted.current = true;
-
-    const audio = getSharedAudio();
-    if (audio && !audio.getAttribute("src")) {
-      audio.src = getNumberAudioUrl(1);
-      sharedAudioNumber = 1;
-      audio.load();
-    }
 
     if (getSpeechSupport()) {
       const synth = window.speechSynthesis;
