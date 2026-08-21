@@ -33,7 +33,7 @@ export function LearnScreen({
   const goTo = (number: number) => {
     markLearned(number);
     onNumberChange(number);
-    speak(toChineseNumber(number));
+    speak(number);
   };
 
   const handlePrevious = () => {
@@ -65,7 +65,7 @@ export function LearnScreen({
         <button
           type="button"
           className={`giant-number giant-number-${String(currentNumber).length}`}
-          onClick={() => speak(chinese)}
+          onClick={() => speak(currentNumber)}
           aria-label={`数字 ${currentNumber}，点击朗读${chinese}`}
           data-testid="giant-number"
         >
@@ -75,7 +75,7 @@ export function LearnScreen({
         <button
           type="button"
           className="speak-number-button"
-          onClick={() => speak(chinese)}
+          onClick={() => speak(currentNumber)}
           disabled={!supported || !progress.soundEnabled}
           aria-label={`朗读${chinese}`}
         >
