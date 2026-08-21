@@ -66,7 +66,7 @@ npm run preview -- --port 8080
 
 ### Vercel
 
-导入仓库后使用默认 Next.js 配置即可。项目会静态导出，不需要服务器。
+导入仓库后使用默认 Next.js 配置即可。项目会静态导出，不需要服务器。`main` 分支用于生产环境自动部署。
 
 ### Cloudflare Pages
 
