@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { BackButton, Confetti, PageTitle, QuantityDisplay, SoundButton, StarBadge } from "@/components/ui";
 import { PlaySoundIcon, StarIcon } from "@/components/icons";
-import { createAnswerOptions, getNumberItem, toChineseNumber } from "@/lib/numbers";
+import { createAnswerOptions, getNumberItem } from "@/lib/numbers";
 import { useChineseSpeech } from "@/hooks/use-chinese-speech";
 import { useProgress } from "@/providers/progress-provider";
 
@@ -64,7 +64,7 @@ export function GamesScreen({ onBack }: { onBack: () => void }) {
     setMode(nextMode);
 
     if (nextMode === "listen") {
-      speak(toChineseNumber(nextQuestion.target), { force: forceSound });
+      speak(nextQuestion.target, { force: forceSound });
     }
   }, [clearNextTimer, speak]);
 
@@ -126,7 +126,7 @@ export function GamesScreen({ onBack }: { onBack: () => void }) {
       setSoundDialog("unsupported");
       return;
     }
-    speak(toChineseNumber(question.target));
+    speak(question.target);
   };
 
   return (
