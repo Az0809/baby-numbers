@@ -1,0 +1,707 @@
+{
+  "version": "2026-08-21-v1",
+  "mime": "audio/mpeg",
+  "generator": "espeak zh+f3 + ffmpeg",
+  "files": {
+    "1": {
+      "text": "一",
+      "path": "/audio/numbers/1.mp3",
+      "bytes": 4269,
+      "duration": 0.672,
+      "sha256": "955cb7a64496871860f4231c44c9d2092399ae60ff1106edecb5c0230b114676"
+    },
+    "2": {
+      "text": "二",
+      "path": "/audio/numbers/2.mp3",
+      "bytes": 4269,
+      "duration": 0.672,
+      "sha256": "cd58632d8e22b156921d01d4d526519c7c1fca4285172de4c296f4783bb5cf0b"
+    },
+    "3": {
+      "text": "三",
+      "path": "/audio/numbers/3.mp3",
+      "bytes": 4845,
+      "duration": 0.768,
+      "sha256": "0eec27e168907f19b359b05efcea8e3238688861b2e23c86845cbad1e06161d4"
+    },
+    "4": {
+      "text": "四",
+      "path": "/audio/numbers/4.mp3",
+      "bytes": 4413,
+      "duration": 0.696,
+      "sha256": "7f230593539ec4cef1ca6d5bcfdef00a2619dce34537a7cd1cde8b2d7d956b9d"
+    },
+    "5": {
+      "text": "五",
+      "path": "/audio/numbers/5.mp3",
+      "bytes": 4701,
+      "duration": 0.744,
+      "sha256": "6275a74c1aa9ff1998945f590871274798185274ebea5ab76235eafa6d08f97e"
+    },
+    "6": {
+      "text": "六",
+      "path": "/audio/numbers/6.mp3",
+      "bytes": 4413,
+      "duration": 0.696,
+      "sha256": "dbe0f00f95b53af3f4fea39dafaa99e49b1693abd4a23f41aa89393ae16c3ab0"
+    },
+    "7": {
+      "text": "七",
+      "path": "/audio/numbers/7.mp3",
+      "bytes": 4557,
+      "duration": 0.72,
+      "sha256": "da4a45846a3cd0554cdc4af5f810719020e1a77c88fe4121782fcceecd2ffa54"
+    },
+    "8": {
+      "text": "八",
+      "path": "/audio/numbers/8.mp3",
+      "bytes": 4125,
+      "duration": 0.648,
+      "sha256": "148d24e5fc94b75ffa72cafba309b37a3bc5c40aebbb77e19764db5c57ac4020"
+    },
+    "9": {
+      "text": "九",
+      "path": "/audio/numbers/9.mp3",
+      "bytes": 4701,
+      "duration": 0.744,
+      "sha256": "a89d79f3e8a46c037b83c0ae47ae7e89bbba2700545a453b0380ba73fe51b0fa"
+    },
+    "10": {
+      "text": "十",
+      "path": "/audio/numbers/10.mp3",
+      "bytes": 4845,
+      "duration": 0.768,
+      "sha256": "95b0ac01c7545aab2c58023cef240010d1fae54fe8760cf201439062b1172c25"
+    },
+    "11": {
+      "text": "十一",
+      "path": "/audio/numbers/11.mp3",
+      "bytes": 6573,
+      "duration": 1.056,
+      "sha256": "3b10e0b4ff3823e6865f2527eccfc4b0956056fa6739f29c52c590dd79374f79"
+    },
+    "12": {
+      "text": "十二",
+      "path": "/audio/numbers/12.mp3",
+      "bytes": 6285,
+      "duration": 1.008,
+      "sha256": "08133eb0c375d55cc223591060a304c5f79ac29c0d6038ec0265be7a4a099a88"
+    },
+    "13": {
+      "text": "十三",
+      "path": "/audio/numbers/13.mp3",
+      "bytes": 7005,
+      "duration": 1.128,
+      "sha256": "97d0250f7c501b244ca732244653d90da4f386452708379e04e6b62fd5d4315b"
+    },
+    "14": {
+      "text": "十四",
+      "path": "/audio/numbers/14.mp3",
+      "bytes": 6717,
+      "duration": 1.08,
+      "sha256": "290f6942a240ea081a7cf3e1302fc2884eae6841680f088a6da93af874dec50d"
+    },
+    "15": {
+      "text": "十五",
+      "path": "/audio/numbers/15.mp3",
+      "bytes": 6717,
+      "duration": 1.08,
+      "sha256": "5f23e1068d79caad7529bd5dfd627ab597cdd271e2c2bb61cd0e453aa2c51883"
+    },
+    "16": {
+      "text": "十六",
+      "path": "/audio/numbers/16.mp3",
+      "bytes": 6429,
+      "duration": 1.032,
+      "sha256": "a40a60fcc72c8998144a710347b053e0d5038ba13f3b268f6eaade74faf98651"
+    },
+    "17": {
+      "text": "十七",
+      "path": "/audio/numbers/17.mp3",
+      "bytes": 7005,
+      "duration": 1.128,
+      "sha256": "a57686d7427d4d02eb0df354a7e1ad9dfc496a79ead2382025da414519ecaba1"
+    },
+    "18": {
+      "text": "十八",
+      "path": "/audio/numbers/18.mp3",
+      "bytes": 6429,
+      "duration": 1.032,
+      "sha256": "40bc0de4de28b0e91f3fff49ad1c086ba093d90fecce37e133e00ee8f0b72724"
+    },
+    "19": {
+      "text": "十九",
+      "path": "/audio/numbers/19.mp3",
+      "bytes": 7005,
+      "duration": 1.128,
+      "sha256": "0d777b8391568ff724c10ad266f10eda89052f094955337fcb67ceb89e9d9fc0"
+    },
+    "20": {
+      "text": "二十",
+      "path": "/audio/numbers/20.mp3",
+      "bytes": 6861,
+      "duration": 1.104,
+      "sha256": "4e04ec9eb189c3db4e44dd0e6e10e0d67e5c3748412c09e3624eb7bbcdaf966c"
+    },
+    "21": {
+      "text": "二十一",
+      "path": "/audio/numbers/21.mp3",
+      "bytes": 8589,
+      "duration": 1.392,
+      "sha256": "da4f50167d3a3c4869305da26064aabbc46712c366291c9211f3d3150faa6ae5"
+    },
+    "22": {
+      "text": "二十二",
+      "path": "/audio/numbers/22.mp3",
+      "bytes": 8301,
+      "duration": 1.344,
+      "sha256": "5f0fe44f8e72706660cb399043aaadff00858c7852afb60ea8ecb70f72749cc6"
+    },
+    "23": {
+      "text": "二十三",
+      "path": "/audio/numbers/23.mp3",
+      "bytes": 9021,
+      "duration": 1.464,
+      "sha256": "2fa16d9618330ec3213f961cd3a4b221fa9f792d7dd0497645d004452926121a"
+    },
+    "24": {
+      "text": "二十四",
+      "path": "/audio/numbers/24.mp3",
+      "bytes": 8589,
+      "duration": 1.392,
+      "sha256": "0ac890a7d087b849d7bfc4f3fdc1d5fec097a75a7488acff4739742b5b9c0116"
+    },
+    "25": {
+      "text": "二十五",
+      "path": "/audio/numbers/25.mp3",
+      "bytes": 8733,
+      "duration": 1.416,
+      "sha256": "82ec5222ae2c1785bc8decda83b9847a0810145ae7ebfa5a143bac9d96e32133"
+    },
+    "26": {
+      "text": "二十六",
+      "path": "/audio/numbers/26.mp3",
+      "bytes": 8445,
+      "duration": 1.368,
+      "sha256": "75cac392230c812d68bc60b48bd090a2a6b718a06b84fb8be9125066415a99e1"
+    },
+    "27": {
+      "text": "二十七",
+      "path": "/audio/numbers/27.mp3",
+      "bytes": 9021,
+      "duration": 1.464,
+      "sha256": "2f68ce593f2005d5d4212458a40f1b523187aafd50c3b2f61e106ae53f07123c"
+    },
+    "28": {
+      "text": "二十八",
+      "path": "/audio/numbers/28.mp3",
+      "bytes": 8445,
+      "duration": 1.368,
+      "sha256": "980496f75ed91f1132a1b9438dfec87012bb6d884226ad49ffa4fc2adb74a51e"
+    },
+    "29": {
+      "text": "二十九",
+      "path": "/audio/numbers/29.mp3",
+      "bytes": 9021,
+      "duration": 1.464,
+      "sha256": "1e788ff73925f79dbe31d8084c97864fc74663741daca83b2c5957c997a7e904"
+    },
+    "30": {
+      "text": "三十",
+      "path": "/audio/numbers/30.mp3",
+      "bytes": 7437,
+      "duration": 1.2,
+      "sha256": "143ebaec846b56740d823f968c94a76fc437ee312f22392f07f21b86de842198"
+    },
+    "31": {
+      "text": "三十一",
+      "path": "/audio/numbers/31.mp3",
+      "bytes": 9165,
+      "duration": 1.488,
+      "sha256": "3c9d5d0f360730dd22609b838e884175893aae77d2cd2d3ca119ec57718f70d5"
+    },
+    "32": {
+      "text": "三十二",
+      "path": "/audio/numbers/32.mp3",
+      "bytes": 8877,
+      "duration": 1.44,
+      "sha256": "f50eb9cd74657e924775bf7bd10c11b61aa9138a0eefc1fe88898e4fe26ab8ba"
+    },
+    "33": {
+      "text": "三十三",
+      "path": "/audio/numbers/33.mp3",
+      "bytes": 9597,
+      "duration": 1.56,
+      "sha256": "0cb3350f923c4464e31942f6f5f0f00d09557f647f474bc5081dbe9c40aed9fc"
+    },
+    "34": {
+      "text": "三十四",
+      "path": "/audio/numbers/34.mp3",
+      "bytes": 9165,
+      "duration": 1.488,
+      "sha256": "cf0ecbfc43b3b253a4c587d5a55fc0cb26119d645b974b75d47981cb308a8cab"
+    },
+    "35": {
+      "text": "三十五",
+      "path": "/audio/numbers/35.mp3",
+      "bytes": 9309,
+      "duration": 1.512,
+      "sha256": "12dead16c479ffdbbc0f5574731d9c1437ab7d99525cff931aac60255c26b94a"
+    },
+    "36": {
+      "text": "三十六",
+      "path": "/audio/numbers/36.mp3",
+      "bytes": 9021,
+      "duration": 1.464,
+      "sha256": "6383e413d0631ca44f95885b9cc5c94bbd97f57104a719cc713b756ba2d90d83"
+    },
+    "37": {
+      "text": "三十七",
+      "path": "/audio/numbers/37.mp3",
+      "bytes": 9597,
+      "duration": 1.56,
+      "sha256": "f1b9e4819845bce3a11b0a12a57d760426b6006283857555cacd517f2c7b264b"
+    },
+    "38": {
+      "text": "三十八",
+      "path": "/audio/numbers/38.mp3",
+      "bytes": 9021,
+      "duration": 1.464,
+      "sha256": "26156705f864bde18713c0573db81ddcfc33982752775183031fac2bbd07b9f6"
+    },
+    "39": {
+      "text": "三十九",
+      "path": "/audio/numbers/39.mp3",
+      "bytes": 9597,
+      "duration": 1.56,
+      "sha256": "fbc7d400b82f58654f22d1a23a77d6bf15003f7ca6d68de85f3d7293a8497e9c"
+    },
+    "40": {
+      "text": "四十",
+      "path": "/audio/numbers/40.mp3",
+      "bytes": 6861,
+      "duration": 1.104,
+      "sha256": "779409ce32d2c7860cfe978739c5a1aee4bdc42a418386804fcb20ef95d8d296"
+    },
+    "41": {
+      "text": "四十一",
+      "path": "/audio/numbers/41.mp3",
+      "bytes": 8733,
+      "duration": 1.416,
+      "sha256": "1c473977a28d5a85add142b0f6620ff912ef2d215344da228e0e22ce233a0180"
+    },
+    "42": {
+      "text": "四十二",
+      "path": "/audio/numbers/42.mp3",
+      "bytes": 8301,
+      "duration": 1.344,
+      "sha256": "7deef667b66e3d73b6226c1ad4a24a37f5c0218c59a30fefb8e65053c13ac96d"
+    },
+    "43": {
+      "text": "四十三",
+      "path": "/audio/numbers/43.mp3",
+      "bytes": 9021,
+      "duration": 1.464,
+      "sha256": "09b8265b93ce283fb685204b86cd36170dd67cac872ae76167b99f553e00402d"
+    },
+    "44": {
+      "text": "四十四",
+      "path": "/audio/numbers/44.mp3",
+      "bytes": 8733,
+      "duration": 1.416,
+      "sha256": "fd0a9ee3c11a7b8a9c3695e0eada2af855d1042da12cf78e2bfde773f6226692"
+    },
+    "45": {
+      "text": "四十五",
+      "path": "/audio/numbers/45.mp3",
+      "bytes": 8733,
+      "duration": 1.416,
+      "sha256": "ac8312dabbd76cc117aa60a0f3eb1745282a4e04818b52c952ef742866006fd7"
+    },
+    "46": {
+      "text": "四十六",
+      "path": "/audio/numbers/46.mp3",
+      "bytes": 8589,
+      "duration": 1.392,
+      "sha256": "663e0f76dadb43fdb77312d15dc8e4dde820c7aba4351b0f060bc9303218eb7d"
+    },
+    "47": {
+      "text": "四十七",
+      "path": "/audio/numbers/47.mp3",
+      "bytes": 9021,
+      "duration": 1.464,
+      "sha256": "552401a994321811840ddba21e0e219a23fd6acf3fd56eedaf8ed15346072673"
+    },
+    "48": {
+      "text": "四十八",
+      "path": "/audio/numbers/48.mp3",
+      "bytes": 8445,
+      "duration": 1.368,
+      "sha256": "4d2af50d39194cd344ef5e780fc51ac75783d9ff05b3e8c24795bb36be405d5a"
+    },
+    "49": {
+      "text": "四十九",
+      "path": "/audio/numbers/49.mp3",
+      "bytes": 9165,
+      "duration": 1.488,
+      "sha256": "498335f3ae47202fa3995cc8526205da0c1f80b5d700a3382be2c8d0df1e0d29"
+    },
+    "50": {
+      "text": "五十",
+      "path": "/audio/numbers/50.mp3",
+      "bytes": 6717,
+      "duration": 1.08,
+      "sha256": "75ff935a8c0a28caf20f87e25b62214b934c1bb74975ad7875282a4eecd62db2"
+    },
+    "51": {
+      "text": "五十一",
+      "path": "/audio/numbers/51.mp3",
+      "bytes": 8589,
+      "duration": 1.392,
+      "sha256": "d9b33273a57249ea5cde96aedc86bd0c00c0ccb357de573a883aabf691cf93f5"
+    },
+    "52": {
+      "text": "五十二",
+      "path": "/audio/numbers/52.mp3",
+      "bytes": 8301,
+      "duration": 1.344,
+      "sha256": "8e2e4c2456707bb2c26c338da3041082f5bf31a2d5f4e872e7ffc40d0b89ccea"
+    },
+    "53": {
+      "text": "五十三",
+      "path": "/audio/numbers/53.mp3",
+      "bytes": 9021,
+      "duration": 1.464,
+      "sha256": "27fc3895ea62c24d9713b26195aaff8d035033480b831117768ee8cd76319e7f"
+    },
+    "54": {
+      "text": "五十四",
+      "path": "/audio/numbers/54.mp3",
+      "bytes": 8589,
+      "duration": 1.392,
+      "sha256": "c20c4fa0e474d0c527f58a88bfe38e3a1da96c43968009458724da8ef0c4e00e"
+    },
+    "55": {
+      "text": "五十五",
+      "path": "/audio/numbers/55.mp3",
+      "bytes": 8733,
+      "duration": 1.416,
+      "sha256": "c59e75d38c275a0637c4ed8689521d6404862b5f70241af73e4d8557da5fac65"
+    },
+    "56": {
+      "text": "五十六",
+      "path": "/audio/numbers/56.mp3",
+      "bytes": 8445,
+      "duration": 1.368,
+      "sha256": "8c101f9bbd6676153b8dd9553d3562976682f6b77bf6170e353d0c55646393a9"
+    },
+    "57": {
+      "text": "五十七",
+      "path": "/audio/numbers/57.mp3",
+      "bytes": 8877,
+      "duration": 1.44,
+      "sha256": "ac3f00159c2fcb174b9b676757f468245c65406c71bd156f7f59ca582698c854"
+    },
+    "58": {
+      "text": "五十八",
+      "path": "/audio/numbers/58.mp3",
+      "bytes": 8301,
+      "duration": 1.344,
+      "sha256": "5af01fbc3ad23b6dd8f4bd486ebcecafe9c26a1d2922bb0d35a6b4f252aa16e5"
+    },
+    "59": {
+      "text": "五十九",
+      "path": "/audio/numbers/59.mp3",
+      "bytes": 9021,
+      "duration": 1.464,
+      "sha256": "c57bf76ca2a7011797bd3dc3430dfabaeff2e21684d949414136eafcb941f424"
+    },
+    "60": {
+      "text": "六十",
+      "path": "/audio/numbers/60.mp3",
+      "bytes": 6861,
+      "duration": 1.104,
+      "sha256": "672f1608e57d2d3c6bc417b5ffc5fef60034b878dfcbb8e7f2eae1180cb9f669"
+    },
+    "61": {
+      "text": "六十一",
+      "path": "/audio/numbers/61.mp3",
+      "bytes": 8589,
+      "duration": 1.392,
+      "sha256": "ea7e330b46b377a31b873d809fe0cda2f7977f7f2384992ba918fea42aeb488c"
+    },
+    "62": {
+      "text": "六十二",
+      "path": "/audio/numbers/62.mp3",
+      "bytes": 8301,
+      "duration": 1.344,
+      "sha256": "27352965e4e617a844144608d48ae6d808383e130c047e4206f08caa609773e9"
+    },
+    "63": {
+      "text": "六十三",
+      "path": "/audio/numbers/63.mp3",
+      "bytes": 9021,
+      "duration": 1.464,
+      "sha256": "01e87eabd15ec8ddacc3bfafa126a1517d13b2fc1f492cffadf25facf2280d83"
+    },
+    "64": {
+      "text": "六十四",
+      "path": "/audio/numbers/64.mp3",
+      "bytes": 8589,
+      "duration": 1.392,
+      "sha256": "2dcfe4fc5f0f9e738e2c925782e223e2f37b246ed0cb12876429479f40a7818a"
+    },
+    "65": {
+      "text": "六十五",
+      "path": "/audio/numbers/65.mp3",
+      "bytes": 8733,
+      "duration": 1.416,
+      "sha256": "57cf20a394a3fc251d4a0f116e4ebdbdb24d8c460b00367f70b7054f3286d74a"
+    },
+    "66": {
+      "text": "六十六",
+      "path": "/audio/numbers/66.mp3",
+      "bytes": 8445,
+      "duration": 1.368,
+      "sha256": "3083c0ded1b5559f69e51863ea3f9a17f42a3ba9c2911eb6a94afa9231e2ed7c"
+    },
+    "67": {
+      "text": "六十七",
+      "path": "/audio/numbers/67.mp3",
+      "bytes": 8877,
+      "duration": 1.44,
+      "sha256": "1894ce78388101d27cc6267d4c7d68e364ec5ffe0007267e587a8402a04b6669"
+    },
+    "68": {
+      "text": "六十八",
+      "path": "/audio/numbers/68.mp3",
+      "bytes": 8301,
+      "duration": 1.344,
+      "sha256": "2b5595c280858e82f039a91d4f4b22d083a82d1639361c7324978f6f8644dc09"
+    },
+    "69": {
+      "text": "六十九",
+      "path": "/audio/numbers/69.mp3",
+      "bytes": 9021,
+      "duration": 1.464,
+      "sha256": "aae852712d2ec1368dfdd95e7860e08ce75af0744114d5d38cce50aa6c3c4345"
+    },
+    "70": {
+      "text": "七十",
+      "path": "/audio/numbers/70.mp3",
+      "bytes": 7005,
+      "duration": 1.128,
+      "sha256": "89aa728acf7236beb319439eb0bedc50c5764c88bdc715820c27c01e18dd2bf9"
+    },
+    "71": {
+      "text": "七十一",
+      "path": "/audio/numbers/71.mp3",
+      "bytes": 8877,
+      "duration": 1.44,
+      "sha256": "9cd6dfdaea6fa3b16339309e03e9b17f8aa213e4333aa5a54d6ca97604bb346a"
+    },
+    "72": {
+      "text": "七十二",
+      "path": "/audio/numbers/72.mp3",
+      "bytes": 8589,
+      "duration": 1.392,
+      "sha256": "e930c6bfde0ce65836b69b3c431a74a48a2890fe5f58cd3fe03b9d9599d4b9fb"
+    },
+    "73": {
+      "text": "七十三",
+      "path": "/audio/numbers/73.mp3",
+      "bytes": 9309,
+      "duration": 1.512,
+      "sha256": "8d322780f13cca8dd90f1eecc0cbe5964cd01936b5b800ab8915c08e383e7a80"
+    },
+    "74": {
+      "text": "七十四",
+      "path": "/audio/numbers/74.mp3",
+      "bytes": 8877,
+      "duration": 1.44,
+      "sha256": "e5a28404bf7d3910ffc4b299806dda7b54af875408baabe312d212bcfb23fd0e"
+    },
+    "75": {
+      "text": "七十五",
+      "path": "/audio/numbers/75.mp3",
+      "bytes": 9021,
+      "duration": 1.464,
+      "sha256": "2cf42bb99e0b96d55e17e635188cd9f0aedce3d96e2383d3b944256d0f736655"
+    },
+    "76": {
+      "text": "七十六",
+      "path": "/audio/numbers/76.mp3",
+      "bytes": 8733,
+      "duration": 1.416,
+      "sha256": "d2c8b746022bcdb8b307f174a86eec8a44d164c90a4bb283032b1014ae84b959"
+    },
+    "77": {
+      "text": "七十七",
+      "path": "/audio/numbers/77.mp3",
+      "bytes": 9165,
+      "duration": 1.488,
+      "sha256": "422398e20cbf2e31758fac9f57621c9cebee1194674363a187d0599d6c47a767"
+    },
+    "78": {
+      "text": "七十八",
+      "path": "/audio/numbers/78.mp3",
+      "bytes": 8733,
+      "duration": 1.416,
+      "sha256": "b03699addf8ab0feffe367bf5381149431553bf2811daeecaad48fc72619558f"
+    },
+    "79": {
+      "text": "七十九",
+      "path": "/audio/numbers/79.mp3",
+      "bytes": 9309,
+      "duration": 1.512,
+      "sha256": "b81c4d14d98dd7e041f202b6e1d04cc4d0ab61df7ed5981c8812073b6a598ab6"
+    },
+    "80": {
+      "text": "八十",
+      "path": "/audio/numbers/80.mp3",
+      "bytes": 6429,
+      "duration": 1.032,
+      "sha256": "274e4b009d61723b0648ab40bb70aa67e902e247332c1f416ee9e5569f92b1a3"
+    },
+    "81": {
+      "text": "八十一",
+      "path": "/audio/numbers/81.mp3",
+      "bytes": 8301,
+      "duration": 1.344,
+      "sha256": "82c575f418ff2c43a830f442c77a5a5ec549442c8e290d683042894ac3dea7ba"
+    },
+    "82": {
+      "text": "八十二",
+      "path": "/audio/numbers/82.mp3",
+      "bytes": 8013,
+      "duration": 1.296,
+      "sha256": "4c52ec3ffc6747f1c3830846cfb287eed0b37f87462ddc96707ffdd568bb0792"
+    },
+    "83": {
+      "text": "八十三",
+      "path": "/audio/numbers/83.mp3",
+      "bytes": 8733,
+      "duration": 1.416,
+      "sha256": "f609febbd4c94b030b539c9691b3d60500a0f037efc5775cc4dd4e0f5385a3c1"
+    },
+    "84": {
+      "text": "八十四",
+      "path": "/audio/numbers/84.mp3",
+      "bytes": 8301,
+      "duration": 1.344,
+      "sha256": "153ecd5f5e26392765f5e9b9409e0c5ce09097defb9ef7edfd1ce260b08827f4"
+    },
+    "85": {
+      "text": "八十五",
+      "path": "/audio/numbers/85.mp3",
+      "bytes": 8445,
+      "duration": 1.368,
+      "sha256": "65119a776920e8f7bad0ef0a314637536efe9595d25c6ae666382951e23b7980"
+    },
+    "86": {
+      "text": "八十六",
+      "path": "/audio/numbers/86.mp3",
+      "bytes": 8157,
+      "duration": 1.32,
+      "sha256": "7eb4e6884c3eca4df80325c8e7e572c5642aeca278fb14e33686e6c5cbba1d99"
+    },
+    "87": {
+      "text": "八十七",
+      "path": "/audio/numbers/87.mp3",
+      "bytes": 8589,
+      "duration": 1.392,
+      "sha256": "8b33b3b3fefdecde59e965b3e70df22f882a649b226c99487f2312e61f4776b9"
+    },
+    "88": {
+      "text": "八十八",
+      "path": "/audio/numbers/88.mp3",
+      "bytes": 8013,
+      "duration": 1.296,
+      "sha256": "e66594dcdaabe9b0a6a36374fa56109ec6f7b5d0946bff66d91a4824da1b12f7"
+    },
+    "89": {
+      "text": "八十九",
+      "path": "/audio/numbers/89.mp3",
+      "bytes": 8733,
+      "duration": 1.416,
+      "sha256": "a072a008478fb500b368ee166be6fc04865fe4861307351acdf42693baa7c08c"
+    },
+    "90": {
+      "text": "九十",
+      "path": "/audio/numbers/90.mp3",
+      "bytes": 6861,
+      "duration": 1.104,
+      "sha256": "ef236e5b349e04523fe86be2fe907bdd36b8623aa2f962d617fbd4277d2871d3"
+    },
+    "91": {
+      "text": "九十一",
+      "path": "/audio/numbers/91.mp3",
+      "bytes": 8589,
+      "duration": 1.392,
+      "sha256": "173ab5b82d3469b699cd4706556b4c3f7a717fc78de247c8c5efa1859225ca33"
+    },
+    "92": {
+      "text": "九十二",
+      "path": "/audio/numbers/92.mp3",
+      "bytes": 8301,
+      "duration": 1.344,
+      "sha256": "5c50f7d3fb0cc8c7e40f92da2a59ea06b468a013110859b6bfcf8949ecf18a86"
+    },
+    "93": {
+      "text": "九十三",
+      "path": "/audio/numbers/93.mp3",
+      "bytes": 9021,
+      "duration": 1.464,
+      "sha256": "b01a4c0dcb5fe56862b446d61884c24078562bdae1b71e187a473d806a98df6d"
+    },
+    "94": {
+      "text": "九十四",
+      "path": "/audio/numbers/94.mp3",
+      "bytes": 8589,
+      "duration": 1.392,
+      "sha256": "00c38ba69e49cbb2e20a4e68f4e17fa06df1cd612d8a2f6d9a2c39edf6f60565"
+    },
+    "95": {
+      "text": "九十五",
+      "path": "/audio/numbers/95.mp3",
+      "bytes": 8733,
+      "duration": 1.416,
+      "sha256": "8e2f12172d758837ded58d61deac1ff3e1021dc8f7f4dc66a89055a4b4d037cb"
+    },
+    "96": {
+      "text": "九十六",
+      "path": "/audio/numbers/96.mp3",
+      "bytes": 8445,
+      "duration": 1.368,
+      "sha256": "8ccbc0888e7cbe0bdb1c00cd8fa9dbc12b197902ccae511a53558624c0a26c7d"
+    },
+    "97": {
+      "text": "九十七",
+      "path": "/audio/numbers/97.mp3",
+      "bytes": 9021,
+      "duration": 1.464,
+      "sha256": "9a27fc068694c050438fd07d86df258d3965af67c37b91413df67eefec3616c7"
+    },
+    "98": {
+      "text": "九十八",
+      "path": "/audio/numbers/98.mp3",
+      "bytes": 8445,
+      "duration": 1.368,
+      "sha256": "92a4bc7dda4d72992c5a0f393c051e9774a2440c76ca7629763c3672eccadb17"
+    },
+    "99": {
+      "text": "九十九",
+      "path": "/audio/numbers/99.mp3",
+      "bytes": 9021,
+      "duration": 1.464,
+      "sha256": "2faba9ebad0c3fc3a75e4f5c6f9bda78a868d6a5cfa6f863f7157ac2d1843093"
+    },
+    "100": {
+      "text": "一百",
+      "path": "/audio/numbers/100.mp3",
+      "bytes": 6429,
+      "duration": 1.032,
+      "sha256": "03a8e8174073d135f2c5e9f90efb7a5aa9c7527dcde502ab5dc9d8abb67b4ceb"
+    }
+  }
+}
