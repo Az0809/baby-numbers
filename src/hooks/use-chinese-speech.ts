@@ -10,7 +10,7 @@ type SpeakOptions = {
 
 type SpeakValue = number | string;
 
-const AUDIO_VERSION = "2026-08-21-v1";
+const AUDIO_VERSION = "2026-08-21-v2-natural";
 const chineseNumberLookup = new Map<string, number>(
   Array.from({ length: 100 }, (_, index) => {
     const number = index + 1;
