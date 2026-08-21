@@ -1,15 +1,22 @@
 from __future__ import annotations
 
+import asyncio
 import hashlib
 import json
 import shutil
 import subprocess
-import tempfile
 from pathlib import Path
+
+import edge_tts
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "public" / "audio" / "numbers"
 DIGITS = "零一二三四五六七八九"
+VOICE = "zh-CN-XiaoyiNeural"
+RATE = "-12%"
+PITCH = "+4Hz"
+VOLUME = "+0%"
+AUDIO_VERSION = "2026-08-21-v2-natural"
 
 
 def to_chinese(number: int) -> str:
@@ -28,61 +35,74 @@ def command_exists(name: str) -> bool:
     return shutil.which(name) is not None
 
 
-def main() -> None:
-    for command in ("espeak", "ffmpeg", "ffprobe"):
+async def synthesize(number: int, text: str, target: Path) -> None:
+    raw = target.with_suffix(".raw.mp3")
+    communicate = edge_tts.Communicate(
+        text=text,
+        voice=VOICE,
+        rate=RATE,
+        pitch=PITCH,
+        volume=VOLUME,
+    )
+    await communicate.save(str(raw))
+
+    subprocess.run([
+        "ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", str(raw),
+        "-af",
+        "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-55dB:"
+        "stop_periods=1:stop_duration=0.05:stop_threshold=-55dB,"
+        "apad=pad_dur=0.08,loudnorm=I=-18:TP=-2:LRA=7",
+        "-ar", "24000", "-ac", "1", "-codec:a", "libmp3lame", "-b:a", "64k",
+        str(target)
+    ], check=True)
+    raw.unlink(missing_ok=True)
+
+
+async def main() -> None:
+    for command in ("ffmpeg", "ffprobe"):
         if not command_exists(command):
             raise RuntimeError(f"缺少命令：{command}")
 
     OUTPUT.mkdir(parents=True, exist_ok=True)
     manifest: dict[str, object] = {
-        "version": "2026-08-21-v1",
+        "version": AUDIO_VERSION,
         "mime": "audio/mpeg",
-        "generator": "espeak zh+f3 + ffmpeg",
+        "generator": f"edge-tts {VOICE}",
+        "voice": VOICE,
+        "rate": RATE,
+        "pitch": PITCH,
         "files": {}
     }
 
-    with tempfile.TemporaryDirectory(prefix="baby-number-audio-") as temp_dir:
-        temp = Path(temp_dir)
-        for number in range(1, 101):
-            text = to_chinese(number)
-            wav = temp / f"{number}.wav"
-            target = OUTPUT / f"{number}.mp3"
+    for number in range(1, 101):
+        text = to_chinese(number)
+        target = OUTPUT / f"{number}.mp3"
+        print(f"生成 {number}: {text}")
+        await synthesize(number, text, target)
 
-            subprocess.run([
-                "espeak", "-v", "zh+f3", "-s", "125", "-p", "58", "-a", "180",
-                "-w", str(wav), text
-            ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        duration = subprocess.run([
+            "ffprobe", "-v", "error", "-show_entries", "format=duration",
+            "-of", "default=noprint_wrappers=1:nokey=1", str(target)
+        ], check=True, capture_output=True, text=True).stdout.strip()
 
-            subprocess.run([
-                "ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", str(wav),
-                "-af",
-                "silenceremove=start_periods=1:start_duration=0.015:start_threshold=-52dB:"
-                "stop_periods=1:stop_duration=0.06:stop_threshold=-52dB,"
-                "apad=pad_dur=0.10,loudnorm=I=-18:TP=-2:LRA=7",
-                "-ar", "24000", "-ac", "1", "-codec:a", "libmp3lame", "-b:a", "48k",
-                str(target)
-            ], check=True)
+        payload = target.read_bytes()
+        manifest["files"][str(number)] = {
+            "text": text,
+            "path": f"/audio/numbers/{number}.mp3",
+            "bytes": len(payload),
+            "duration": round(float(duration), 3),
+            "sha256": hashlib.sha256(payload).hexdigest()
+        }
 
-            duration = subprocess.run([
-                "ffprobe", "-v", "error", "-show_entries", "format=duration",
-                "-of", "default=noprint_wrappers=1:nokey=1", str(target)
-            ], check=True, capture_output=True, text=True).stdout.strip()
-
-            payload = target.read_bytes()
-            manifest["files"][str(number)] = {
-                "text": text,
-                "path": f"/audio/numbers/{number}.mp3",
-                "bytes": len(payload),
-                "duration": round(float(duration), 3),
-                "sha256": hashlib.sha256(payload).hexdigest()
-            }
+        # 避免一次性并发过高触发服务端限流。
+        await asyncio.sleep(0.08)
 
     (OUTPUT / "manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8"
     )
-    print(f"已生成 {len(manifest['files'])} 个数字音频：{OUTPUT}")
+    print(f"已生成 {len(manifest['files'])} 个自然女声数字音频：{OUTPUT}")
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
