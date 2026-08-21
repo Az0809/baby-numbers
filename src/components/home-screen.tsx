@@ -1,6 +1,7 @@
 "use client";
 
 import { FeatureCard, ProgressCard, SoundButton, StarBadge } from "@/components/ui";
+import { useChineseSpeech } from "@/hooks/use-chinese-speech";
 import { useProgress } from "@/providers/progress-provider";
 
 type HomeScreenProps = {
@@ -17,12 +18,21 @@ export function HomeScreen({ onLearn, onGames, onCards, onStars }: HomeScreenPro
     hasProgress,
     toggleSound
   } = useProgress();
+  const { speak } = useChineseSpeech(progress.soundEnabled);
 
   const learnSubtitle = !ready
     ? "正在读取学习记录"
     : hasProgress && progress.lastNumber
       ? `继续学习数字 ${progress.lastNumber}`
       : "从数字 1 开始";
+
+  const handleSoundToggle = () => {
+    const enabling = !progress.soundEnabled;
+    toggleSound();
+    if (enabling) {
+      speak(1, { force: true });
+    }
+  };
 
   return (
     <main className="screen home-screen" data-testid="home-screen">
@@ -32,7 +42,7 @@ export function HomeScreen({ onLearn, onGames, onCards, onStars }: HomeScreenPro
           <SoundButton
             enabled={progress.soundEnabled}
             ready={ready}
-            onToggle={toggleSound}
+            onToggle={handleSoundToggle}
           />
         </div>
 
