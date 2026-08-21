@@ -46,7 +46,7 @@ export function NumberCardScreen({
 
     markLearned(next);
     onNumberChange(next);
-    speak(toChineseNumber(next));
+    speak(next);
   };
 
   return (
@@ -91,7 +91,7 @@ export function NumberCardScreen({
               didSwipe.current = false;
               return;
             }
-            speak(chinese);
+            speak(currentNumber);
           }}
           aria-label={`数字 ${currentNumber}，点击朗读${chinese}`}
         >
